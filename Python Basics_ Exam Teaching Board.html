@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Python Basics: Exam Teaching Board</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f5f6f1;--panel:#fff;--ink:#1c2622;--mute:#5b6b64;--line:#d5ddd6;--acc:#0f6b5c;--accink:#fff;--hi:#fff1b8;--ok:#1b7f4b;--bad:#b3392f;--code:#eaf0ea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16211e;--panel:#1d2b27;--ink:#eaf0e8;--mute:#9db1a8;--line:#2f433c;--acc:#f2d16b;--accink:#16211e;--hi:#4a4220;--ok:#6fcf97;--bad:#ff8f7e;--code:#111a17}}
+:root[data-theme="dark"]{--bg:#16211e;--panel:#1d2b27;--ink:#eaf0e8;--mute:#9db1a8;--line:#2f433c;--acc:#f2d16b;--accink:#16211e;--hi:#4a4220;--ok:#6fcf97;--bad:#ff8f7e;--code:#111a17}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 "Atkinson Hyperlegible",system-ui,sans-serif}
+.wrap{max-width:720px;margin:0 auto;padding:16px}
+header{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+h1{font-size:1.5rem;line-height:1.2;margin:0}
+h2{font-size:1.2rem;margin:.2rem 0 .6rem}
+.sub,.mute{color:var(--mute);font-size:.92rem}
+button{font:inherit;color:var(--ink);background:var(--panel);border:1.5px solid var(--line);border-radius:8px;padding:8px 12px;cursor:pointer;min-height:40px}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+nav{display:flex;gap:6px;overflow-x:auto;margin:14px 0}
+nav button.on,.chips button.on{background:var(--acc);color:var(--accink);border-color:var(--acc);font-weight:700}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.panel,.card{background:var(--panel);border:1.5px solid var(--line);border-radius:10px;padding:14px;margin:0 0 12px}
+.say{border-left:4px solid var(--acc);padding-left:12px;margin:.4rem 0 1rem}
+.warn{color:var(--mute);font-size:.95rem;margin-top:12px}
+.code{font:14px/1.6 "JetBrains Mono",ui-monospace,Menlo,monospace;background:var(--code);border-radius:8px;padding:10px 0;margin:10px 0;overflow-x:auto}
+.ln{display:block;white-space:pre;padding:0 12px;border-left:4px solid transparent}
+.ln.on{background:var(--hi);border-left-color:var(--acc)}
+.out{font:14px/1.5 "JetBrains Mono",ui-monospace,Menlo,monospace;background:#0d1412;color:#d7f5e3;border-radius:8px;padding:10px 12px;margin:10px 0;white-space:pre-wrap;min-height:2.6em}
+.out.err{color:#ff9b8c}
+.ctl{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+label{display:flex;flex-direction:column;font-size:.9rem;color:var(--mute);gap:3px}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:8px;padding:7px 9px;min-height:40px;max-width:100%}
+input[type=number]{width:90px}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+.opt{display:block;width:100%;text-align:left;margin:6px 0;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.92rem}
+.opt.ok{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 18%,transparent)}
+.opt.no{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 18%,transparent)}
+.why{color:var(--mute);margin:.4rem 0 0}
+.q{font-weight:700;margin:0 0 6px}
+svg{width:100%;max-width:380px;height:auto;display:block;margin:0 auto}
+svg text{fill:var(--ink);font:13px "Atkinson Hyperlegible",sans-serif;text-anchor:middle}
+.s{fill:var(--panel);stroke:var(--line);stroke-width:1.5}
+.nd.on .s{fill:var(--hi);stroke:var(--acc);stroke-width:2.5}
+.e{fill:none;stroke:var(--mute);stroke-width:1.5;marker-end:url(#a)}
+.e.na{marker-end:none}
+.e.on{stroke:var(--acc);stroke-width:3;marker-end:url(#b)}
+.e.na.on{marker-end:none}
+details>summary{cursor:pointer;font-weight:700;padding:4px 0}
+ol{padding-left:22px;margin:.4rem 0}
+footer{text-align:center;color:var(--mute);font-size:.9rem;padding:24px 0 8px}
+@media (prefers-reduced-motion:no-preference){.opt{transition:background .15s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div><h1>Python Basics: Exam Teaching Board</h1><div class="sub" id="prog"></div></div>
+ <button id="th" aria-label="Switch light or dark theme">Theme</button>
+</header>
+<details class="panel" style="margin-top:12px"><summary>Scope: what we teach and skip</summary>
+ <p><b>In:</b> print(), input(), int() / float() / str(), + - * / // % **, if, if-else, for with range().<br>
+ <b>Out:</b> elif, nested if, lists, while, functions.</p></details>
+<nav id="nav" aria-label="Sections"></nav>
+<main id="main"></main>
+<footer>Modau.M IT</footer>
+</div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const fl=x=>Number.isInteger(x)?x+'.0':String(x);
+let P={l:[],pb:0,qb:0};
+try{P=Object.assign(P,JSON.parse(localStorage.getItem('pybasics')||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem('pybasics',JSON.stringify(P))}catch(e){}};
+const code=(lines,on=[])=>'<pre class="code">'+lines.map((l,i)=>'<span class="ln'+(on.includes(i)?' on':'')+'">'+esc(l)+'</span>').join('')+'</pre>';
+const out=(t,err)=>'<pre class="out'+(err?' err':'')+'">'+esc(t)+'</pre>';
+const prog=()=>{$('#prog').textContent='Lessons done '+P.l.length+'/5 · Predict best '+P.pb+'/9 · Quiz best '+P.qb+'/14'};
+
+/* theme */
+let tm=null;try{tm=localStorage.getItem('pytheme')}catch(e){}
+document.documentElement.dataset.theme=tm||'dark';
+$('#th').onclick=()=>{const t=document.documentElement.dataset.theme=='dark'?'light':'dark';document.documentElement.dataset.theme=t;try{localStorage.setItem('pytheme',t)}catch(e){}};
+
+/* demo helper */
+function demo(html,fn){const d=document.createElement('div');d.innerHTML=html;d.addEventListener('input',fn);d.addEventListener('change',fn);setTimeout(fn,0);return d}
+const v=id=>$('#'+id).value;
+
+/* lessons */
+const L=[
+{t:'print() and input()',say:'print() shows things on the screen. input() waits for the user to type, and what comes back is text.',
+ warn:'Text inside quotes is a string. input() never gives you a number by itself.',
+ demo:()=>demo('<label>User types<input id="a" value="Shady"></label><div id="c"></div><div id="o"></div>',()=>{
+  $('#c').innerHTML=code(['name = input("Enter your name: ")','print("Hello", name)']);$('#o').innerHTML=out('Hello '+v('a'))})},
+{t:'Type casting',say:'Casting changes the type: int() makes a whole number, float() a decimal, str() text. Cast before you calculate.',
+ warn:'Without int() or float(), age + 1 tries to add a number to text and fails.',
+ demo:()=>demo('<div class="ctl"><label>User types<input id="a" value="16"></label><label>Cast with<select id="m"><option value="none">nothing</option><option value="int">int()</option><option value="float">float()</option></select></label></div><div id="c"></div><div id="o"></div>',()=>{
+  const m=v('m'),s=v('a');const ls=['age = input("Age: ")'];if(m!='none')ls.push('age = '+m+'(age)');ls.push('print(age + 1)');
+  let r,e=0;
+  if(m=='none'){r='TypeError: can only concatenate str (not "int") to str';e=1}
+  else if(m=='int'){if(/^\s*-?\d+\s*$/.test(s))r=String(parseInt(s)+1);else{r="ValueError: invalid literal for int() with base 10: '"+s+"'";e=1}}
+  else{if(s.trim()!==''&&!isNaN(s))r=fl(parseFloat(s)+1);else{r="ValueError: could not convert string to float: '"+s+"'";e=1}}
+  $('#c').innerHTML=code(ls);$('#o').innerHTML=out(r,e)})},
+{t:'Calculations',say:'Python does maths with operators. Try different numbers and watch / and // differ.',
+ warn:'/ always gives a decimal answer. // drops the decimal part. % gives the remainder.',
+ demo:()=>demo('<div class="ctl"><label>a<input id="a" type="number" value="17"></label><label>b<input id="b" type="number" value="5"></label></div><div id="o"></div>',()=>{
+  const a=+v('a'),b=+v('b'),z='ZeroDivisionError';
+  const R=[['+','add',a+b],['-','subtract',a-b],['*','multiply',a*b],['/','divide, always a decimal',b?fl(a/b):z],['//','whole-number divide',b?Math.floor(a/b):z],['%','remainder',b?((a%b)+b)%b:z],['**','power',b<0?fl(a**b):a**b]];
+  $('#o').innerHTML='<table>'+R.map(r=>'<tr><td><code>'+a+' '+r[0]+' '+b+'</code></td><td>'+r[2]+'</td><td class="mute">'+r[1]+'</td></tr>').join('')+'</table>'})},
+{t:'if and if-else',say:'if runs its block only when the condition is True. else runs when it is False.',
+ warn:'Colon after the condition, indent the block, and use == to compare (a single = stores a value).',
+ demo:()=>demo('<div class="ctl"><label>mark<input id="a" type="number" min="0" max="100" value="62"></label><label>Form<select id="m"><option value="e">if-else</option><option value="i">if only</option></select></label></div><div id="c"></div><div id="o"></div>',()=>{
+  const k=+v('a'),m=v('m'),t=k>=50;const ls=['mark = int(input("Mark: "))','if mark >= 50:','    print("Pass")'];
+  if(m=='e')ls.push('else:','    print("Fail")');
+  const on=t?[1,2]:(m=='e'?[3,4]:[]);
+  $('#c').innerHTML=code(ls,on);$('#o').innerHTML='<p class="mute">mark >= 50 is <b>'+(t?'True':'False')+'</b></p>'+out(t?'Pass':(m=='e'?'Fail':'(nothing printed)'))})},
+{t:'for loop with range()',say:'A for loop repeats a block. range(5) counts 0, 1, 2, 3, 4.',
+ warn:'range(5) stops before 5. Indent the loop body.',
+ demo:()=>demo('<div class="ctl"><label>start<input id="s" type="number" value="0"></label><label>stop<input id="e" type="number" value="5"></label><label>step<input id="st" type="number" value="1"></label><label>Body<select id="m"><option value="s">print("Shady")</option><option value="i">print(i)</option><option value="t">running total</option></select></label></div><div id="c"></div><div id="o"></div>',()=>{
+  const s=+v('s'),e=+v('e'),st=+v('st'),m=v('m');
+  if(!st){$('#c').innerHTML='';$('#o').innerHTML=out('ValueError: range() arg 3 must not be zero',1);return}
+  const arr=[];for(let i=s;st>0?i<e:i>e;i+=st){arr.push(i);if(arr.length>=30)break}
+  const rg=st==1?(s==0?'range('+e+')':'range('+s+', '+e+')'):'range('+s+', '+e+', '+st+')';
+  const body={s:['    print("Shady")'],i:['    print(i)'],t:['    total = total + i']}[m];
+  const ls=(m=='t'?['total = 0']:[]).concat(['for i in '+rg+':'],body,m=='t'?['print(total)']:[]);
+  const f=m=='t'?1:0;
+  const res=m=='s'?arr.map(()=>'Shady').join('\n'):m=='i'?arr.join('\n'):String(arr.reduce((a,b)=>a+b,0));
+  $('#c').innerHTML=code(ls,[f]);
+  $('#o').innerHTML='<p class="mute">Loop runs <b>'+arr.length+'</b> time(s). i takes: '+(arr.join(', ')||'no values')+'</p>'+out(res||'(nothing printed)')})}
+];
+let cur=0;
+function lessons(){const m=$('#main');m.innerHTML='<div class="chips" id="ch"></div><div class="panel" id="lp"></div>';
+ const draw=()=>{$('#ch').innerHTML=L.map((l,i)=>'<button data-i="'+i+'" class="'+(i==cur?'on':'')+'">'+(i+1)+(P.l.includes(i)?' ✓':'')+'</button>').join('');
+  const l=L[cur];$('#lp').innerHTML='<h2>'+l.t+'</h2><p class="say">'+l.say+'</p><div id="dm"></div><p class="warn">Watch out: '+l.warn+'</p><button id="dn">'+(P.l.includes(cur)?'Done ✓ (tap to undo)':'Mark lesson done')+'</button>';
+  $('#dm').appendChild(l.demo());
+  $('#dn').onclick=()=>{P.l=P.l.includes(cur)?P.l.filter(x=>x!=cur):P.l.concat(cur);save();prog();draw()}};
+ $('#ch').onclick=e=>{const b=e.target.closest('button');if(b){cur=+b.dataset.i;draw()}};draw()}
+
+/* flowchart */
+function flow(){
+ $('#main').innerHTML='<div class="panel"><h2>Flowchart with selection</h2><p class="say">Spec: ask for an age. If under 13 the price is R40, otherwise R70. Display the price.</p><div class="ctl"><label>age<input id="a" type="number" min="0" value="10"></label></div><div id="c"></div>'+
+ '<svg viewBox="0 0 360 440" role="img" aria-label="Flowchart for the ticket price program"><defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--mute)"/></marker><marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" style="fill:var(--acc)"/></marker></defs>'+
+ '<path class="e" data-g="all" d="M180 46V72"/><path class="e" data-g="all" d="M180 108V138"/>'+
+ '<path class="e" data-g="y" d="M98 176H70V240"/><path class="e" data-g="n" d="M262 176H290V240"/>'+
+ '<path class="e na" data-g="y" d="M70 278V306H180"/><path class="e na" data-g="n" d="M290 278V306H180"/>'+
+ '<path class="e" data-g="all" d="M180 306V334"/><path class="e" data-g="all" d="M180 370V398"/>'+
+ '<g class="nd" data-g="all"><ellipse class="s" cx="180" cy="28" rx="52" ry="18"/><text x="180" y="33">Start</text></g>'+
+ '<g class="nd" data-g="all"><polygon class="s" points="140,72 250,72 220,108 110,108"/><text x="180" y="95">Input age</text></g>'+
+ '<g class="nd" data-g="all"><polygon class="s" points="180,138 262,176 180,214 98,176"/><text x="180" y="181">age &lt; 13 ?</text></g>'+
+ '<text x="80" y="166">Yes</text><text x="278" y="166">No</text>'+
+ '<g class="nd" data-g="y"><rect class="s" x="10" y="240" width="120" height="38"/><text x="70" y="264">price = 40</text></g>'+
+ '<g class="nd" data-g="n"><rect class="s" x="230" y="240" width="120" height="38"/><text x="290" y="264">price = 70</text></g>'+
+ '<g class="nd" data-g="all"><polygon class="s" points="140,334 250,334 220,370 110,370"/><text x="180" y="357">Output price</text></g>'+
+ '<g class="nd" data-g="all"><ellipse class="s" cx="180" cy="416" rx="52" ry="18"/><text x="180" y="421">End</text></g></svg>'+
+ '<table><tr><td>Oval</td><td>Start / End</td></tr><tr><td>Parallelogram</td><td>Input / Output</td></tr><tr><td>Rectangle</td><td>Process (calculation or assignment)</td></tr><tr><td>Diamond</td><td>Decision, with Yes and No arrows</td></tr></table></div>';
+ const up=()=>{const a=+v('a'),y=a<13;
+  $('#c').innerHTML=code(['age = int(input("Age: "))','if age < 13:','    price = 40','else:','    price = 70','print("Price: R", price)'],y?[1,2,5]:[3,4,5]);
+  document.querySelectorAll('[data-g]').forEach(n=>n.classList.toggle('on',n.dataset.g=='all'||n.dataset.g==(y?'y':'n')))};
+ $('#a').oninput=up;up()}
+
+/* question lists */
+const A={p:{},q:{}};
+const PR=[['x = 7\ny = 2\nprint(x // y, x % y)','3.5 1|3 1|3 0|4 1',1,'7 // 2 is 3 (the whole part). 7 % 2 is 1 (the remainder).'],
+['for i in range(3):\n    print(i)','1 / 2 / 3|0 / 1 / 2|0 / 1 / 2 / 3|1 / 2',1,'range(3) gives 0, 1, 2.'],
+['age = int("16")\nif age >= 18:\n    print("Adult")\nelse:\n    print("Minor")','Adult|Minor|Adult / Minor|Nothing',1,'16 >= 18 is False, so the else block runs.'],
+['for i in range(1, 4):\n    print(i * 2)','2 / 4 / 6|1 / 2 / 3|2 / 4 / 6 / 8|2 4 6 on one line',0,'i is 1, 2, 3 and each is doubled.'],
+['a = "5"\nb = "3"\nprint(a + b)','8|53|"53"|Error',1,'These are strings, so + joins them: 53.'],
+['total = 0\nfor i in range(1, 5):\n    total = total + i\nprint(total)','10|15|4|1 / 3 / 6 / 10',0,'1 + 2 + 3 + 4 = 10. print is outside the loop, so it runs once.'],
+['n = 4\nif n % 2 == 0:\n    print("Even")\nelse:\n    print("Odd")','Odd|Even|Error|Nothing',1,'4 % 2 is 0, so the condition is True.'],
+['print(2 ** 3 + 1)','7|8|9|6',2,'2 ** 3 is 8, then + 1 gives 9.'],
+['for i in range(3):\n    print("Hi")','Hi|Hi / Hi|Hi / Hi / Hi|Hi / Hi / Hi / Hi',2,'The loop body runs 3 times.']
+].map(x=>({q:'What is the output?',c:x[0],o:x[1].split('|'),a:x[2],w:x[3]}));
+const QZ=[['Which function displays output on the screen?','print()|input()|int()|range()',0],
+['What type does input() always return?','int|float|str|bool',2],
+['Which converts "12" into the whole number 12?','str()|int()|float()|print()',1],
+['Which operator gives the remainder of a division?','/|//|%|**',2],
+['Which operator checks whether two values are equal?','=|==|!=|:=',1],
+['What does range(4) produce?','1, 2, 3, 4|0, 1, 2, 3, 4|0, 1, 2, 3|1, 2, 3',2],
+['Which keyword runs when the if condition is False?','else|then|elseif|stop',0],
+['What is 9 // 2?','4.5|4|5|1',1],
+['What must end the line of an if statement?','A semicolon|A full stop|A bracket|A colon',3],
+['Which flowchart shape is a decision?','Oval|Rectangle|Diamond|Parallelogram',2],
+['True or False: A parallelogram in a flowchart is used for input and output.','True|False',0],
+['True or False: In Python, = checks whether two values are equal.','True|False',1],
+['True or False: 5 / 2 gives 2.5 in Python 3.','True|False',0],
+['True or False: for i in range(3) runs its body 4 times.','True|False',1]
+].map(x=>({q:x[0],o:x[1].split('|'),a:x[2]}));
+function card(k,items,i){const it=items[i],ch=A[k][i];
+ return '<div class="card" id="'+k+i+'"><p class="q">'+(i+1)+'. '+esc(it.q)+'</p>'+(it.c?code(it.c.split('\n')):'')+
+ it.o.map((o,j)=>'<button class="opt'+(ch!=null?(j==it.a?' ok':(j==ch?' no':'')):'')+'" '+(ch!=null?'disabled ':'')+'data-k="'+k+'" data-i="'+i+'" data-j="'+j+'">'+esc(o)+'</button>').join('')+
+ (ch!=null&&it.w?'<p class="why">'+esc(it.w)+'</p>':'')+'</div>'}
+function qlist(k,items,intro){const sc=()=>{const n=Object.keys(A[k]).length,r=items.filter((it,i)=>A[k][i]===it.a).length;
+  $('#sc').textContent='Score '+r+' / '+items.length+' ('+n+' answered)';
+  if(n==items.length){const b=k=='p'?'pb':'qb';if(r>P[b]){P[b]=r;save();prog()}}};
+ $('#main').innerHTML='<div class="panel"><h2>'+intro[0]+'</h2><p class="mute">'+intro[1]+'</p><b id="sc"></b> <button id="rs">Start again</button></div><div id="ql">'+items.map((_,i)=>card(k,items,i)).join('')+'</div>';
+ $('#ql').onclick=e=>{const b=e.target.closest('.opt');if(!b)return;const i=+b.dataset.i;A[k][i]=+b.dataset.j;$('#'+k+i).outerHTML=card(k,items,i);sc()};
+ $('#rs').onclick=()=>{A[k]={};qlist(k,items,intro)};sc()}
+
+/* practice */
+const PRC=[{t:'Average and result',s:'Ask for three test marks. Calculate the average. If the average is 50 or more display "Pass", otherwise "Fail". Also display the average.',
+ st:['Get three marks as decimals (float)','Calculate average = (m1 + m2 + m3) / 3','Decide with if-else: average >= 50','Display the average and the result'],
+ c:'m1 = float(input("Mark 1: "))\nm2 = float(input("Mark 2: "))\nm3 = float(input("Mark 3: "))\naverage = (m1 + m2 + m3) / 3\nprint("Average:", average)\nif average >= 50:\n    print("Pass")\nelse:\n    print("Fail")'},
+{t:'Class total (for loop)',s:'Read the marks of 5 students one at a time. Calculate the total and the average. Display both.',
+ st:['Set total = 0 before the loop','for loop repeats 5 times: read a mark, add it to total','After the loop: average = total / 5','Display total and average'],
+ c:'total = 0\nfor i in range(5):\n    mark = float(input("Enter mark: "))\n    total = total + mark\naverage = total / 5\nprint("Total:", total)\nprint("Average:", average)'},
+{t:'Times table (for loop)',s:'Ask for a whole number. Use a for loop to display its times table from 1 to 10.',
+ st:['Get the number (int)','for loop with range(1, 11)','Each pass: calculate and print number x i'],
+ c:'n = int(input("Number: "))\nfor i in range(1, 11):\n    print(n, "x", i, "=", n * i)'}];
+function practice(){$('#main').innerHTML='<p class="mute">Section C style. Plan on paper first (decomposition, then flowchart), then reveal the solution.</p>'+PRC.map(p=>'<details class="panel"><summary>'+p.t+'</summary><p>'+esc(p.s)+'</p><b>Function decomposition</b><ol>'+p.st.map(s=>'<li>'+esc(s)+'</li>').join('')+'</ol><details><summary>Show Python solution</summary>'+code(p.c.split('\n'))+'</details></details>').join('')}
+
+/* nav */
+const T=[['Lessons',lessons],['Flowchart',flow],['Predict output',()=>qlist('p',PR,['Predict the output','Section B style. A slash (/) means a new line.'])],['Quiz',()=>qlist('q',QZ,['Multiple choice and True/False','Section A style.'])],['Practice',practice]];
+$('#nav').innerHTML=T.map((t,i)=>'<button data-i="'+i+'">'+t[0]+'</button>').join('');
+$('#nav').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#nav button').forEach(x=>x.classList.toggle('on',x==b));T[+b.dataset.i][1]()};
+$('#nav button').click();prog();
+</script>
+</body>
+</html>
